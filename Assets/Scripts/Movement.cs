@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.UIElements;
 using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
@@ -10,13 +11,10 @@ public class Movement : MonoBehaviour
 
     public Text txt;
 
-    float curretSpeed = 0.0f;
-
+    float[] engineSpeedData = new float[5];    
     float localEngineSpeed = 0f;
 
-    public float curretGear = 0f;
-
-    int curretShift = 0;
+    public int curretShift = 0;
 
     float hrznt = 0.0f;
 
@@ -31,8 +29,7 @@ public class Movement : MonoBehaviour
     {
         hrznt = GameManager.GetInstance().h;
         
-        
-        Acceleration(curretGear);
+        Acceleration();
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
             GearUp();
@@ -42,22 +39,18 @@ public class Movement : MonoBehaviour
         {
             GearDown();
         }
-
-
-        // придумать как вывести текущую скорость и как тормозить
-
-        curretSpeed = EngineSpeed() * curretGear;
-        txt.text = "Обороты: " + (EngineSpeed()  * 10000) + " Скорось: " + curretSpeed + "Передача: " + curretShift;
+        float printSpeed = localEngineSpeed + EngineSpeed(0.002f);
+        txt.text = "Обороты: " + (EngineSpeed(0.002f) * 10000) + "\n Скорось: " + printSpeed + "\n Передача: " + curretShift;
     }
 
-    public float EngineSpeed()
+    public float EngineSpeed(float power)
     {
         
         if (Math.Abs(hrznt) > 0)
         {
             while (rev < 0.6f)
             {
-                rev += 0.005f;
+                rev += power;
                 return rev;
             }
         }
@@ -69,60 +62,65 @@ public class Movement : MonoBehaviour
                 {
                     break;
                 }
-                rev = rev - 0.005f;
+                rev = rev - power;
                 return rev;
             }
         }
         return rev;
     }
 
-    void Acceleration(float gear)
+    void Acceleration()
     {
-        
-        transform.position = new Vector3(transform.position.x + localEngineSpeed + EngineSpeed() , transform.position.y, transform.position.z);
-    }
-
-    void RecursiveTransmission(int Shift)
-    {
-
+        if (curretShift != 0) 
+            transform.position = new Vector3(transform.position.x + (localEngineSpeed + EngineSpeed(0.002f))  , transform.position.y, transform.position.z);
+        else
+            transform.position = new Vector3(transform.position.x + (localEngineSpeed), transform.position.y, transform.position.z);
     }
 
     void GearUp()
     {
-        if (curretShift == 0)
+        if (curretShift + 1 <= 5 )
         {
-            // curretGear = 1f;
-            localEngineSpeed += EngineSpeed();
+            engineSpeedData[curretShift] = EngineSpeed(0.002f);
+            localEngineSpeed += EngineSpeed(0.002f);
             rev = 0.05f;
             curretShift++;
         }
-        else
-        {
-            if (curretShift <= 6)
-            {
-                localEngineSpeed += EngineSpeed();
-                rev = 0.05f;
-                //curretGear += 0.5f;
-                curretShift++;
-            }
-        }
+        
     }
 
     void GearDown()
     {
-        if (curretGear == 1f)
+        if (curretShift == 1)
         {
-            curretGear = 0f;
             curretShift--;
+            brakeEngineSpeed();
         }
         else
         {
-            if (curretGear - 0.5f >= 1)
+            if (curretShift - 1 >= 0)
             {
-                curretGear -= 0.5f;
+
                 curretShift--;
+                brakeEngineSpeed();
+                rev = engineSpeedData[curretShift];
             }
         }
-        
+    }
+
+    //исправит: при понижении на нейтраль сбрасывает скорость на 0
+
+    void brakeEngineSpeed()
+    {
+        float temp = localEngineSpeed - engineSpeedData[curretShift];
+        while (localEngineSpeed > temp)
+        {
+            if (localEngineSpeed < 0)
+            {
+                localEngineSpeed = 0f;
+                break;
+            }
+            localEngineSpeed = localEngineSpeed - 0.002f;
+        }
     }
 }
