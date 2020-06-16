@@ -10,19 +10,42 @@ public class Movement : MonoBehaviour
 
     public Text txt;
 
+    float curretSpeed = 0.0f;
+
+    public float curretGear = 0f;
+
+    int curretShift = 0;
+
     float hrznt = 0.0f;
+
     float rev = 0.0f;
+
     public void Init(Car cr)
     {
         car = cr;
     }
 
-    public void Accelerate()
+    public void MovementManager()
     {
         hrznt = GameManager.GetInstance().h;
-        //car.rb.AddForce(transform.right * 10.0f * hrznt, ForceMode2D.Force);
-        car.rb.AddForce(transform.right * EngineSpeed() / 2, ForceMode2D.Force);
-        txt.text = "Обороты: " + (EngineSpeed()  * 1000) + " Скорось: " + (transform.right * EngineSpeed() / 2);
+        
+        
+        Acceleration(curretGear);
+        if (Input.GetKeyDown(KeyCode.LeftShift))
+        {
+            GearUp();
+        }
+
+        if (Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            GearDown();
+        }
+
+
+        // придумать как вывести текущую скорость и как тормозить
+
+        curretSpeed = EngineSpeed() * curretGear;
+        txt.text = "Обороты: " + (EngineSpeed()  * 10000) + " Скорось: " + curretSpeed + "Передача: " + curretShift;
     }
 
     public float EngineSpeed()
@@ -30,20 +53,69 @@ public class Movement : MonoBehaviour
         
         if (Math.Abs(hrznt) > 0)
         {
-            while (rev < 6.0f)
+            while (rev < 0.6f)
             {
-                rev += 0.01f;
+                rev += 0.005f;
                 return rev;
             }
         }
         else
         {
-            while (rev > 0.0f)
+            while (true)
             {
-                rev = -0.1f;
+                if (rev < 0.05)
+                {
+                    break;
+                }
+                rev = rev - 0.005f;
                 return rev;
             }
         }
         return rev;
+    }
+
+    void Acceleration(float gear)
+    {
+        transform.position = new Vector3(transform.position.x + EngineSpeed() * gear, transform.position.y, transform.position.z);
+    }
+
+    void RecursiveTransmission(int Shift)
+    {
+
+    }
+
+    void GearUp()
+    {
+        if (curretGear == 0f)
+        {
+            curretGear = 1f;
+            curretShift++;
+        }
+        else
+        {
+            if (curretGear + 0.5f <= 3f)
+            {
+                curretGear += 0.5f;
+                curretShift++;
+            }
+        }
+    }
+
+    void GearDown()
+    {
+        if (curretGear == 1f)
+        {
+            curretGear = 0f;
+            curretShift--;
+        }
+        else
+        {
+            if (curretGear - 0.5f >= 1)
+            {
+                curretGear -= 0.5f;
+                curretShift--;
+            }
+        }
+        
     }
 }

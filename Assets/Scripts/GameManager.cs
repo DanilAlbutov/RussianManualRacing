@@ -24,7 +24,7 @@ public class GameManager : MonoBehaviour
     void Move()
     {
         h = Input.GetAxis("Horizontal");
-        car?.movement.Accelerate();
+        car?.movement.MovementManager();
 
         
         
