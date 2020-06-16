@@ -12,6 +12,8 @@ public class Movement : MonoBehaviour
 
     float curretSpeed = 0.0f;
 
+    float localEngineSpeed = 0f;
+
     public float curretGear = 0f;
 
     int curretShift = 0;
@@ -76,7 +78,8 @@ public class Movement : MonoBehaviour
 
     void Acceleration(float gear)
     {
-        transform.position = new Vector3(transform.position.x + EngineSpeed() * gear, transform.position.y, transform.position.z);
+        
+        transform.position = new Vector3(transform.position.x + localEngineSpeed + EngineSpeed() , transform.position.y, transform.position.z);
     }
 
     void RecursiveTransmission(int Shift)
@@ -86,16 +89,20 @@ public class Movement : MonoBehaviour
 
     void GearUp()
     {
-        if (curretGear == 0f)
+        if (curretShift == 0)
         {
-            curretGear = 1f;
+            // curretGear = 1f;
+            localEngineSpeed += EngineSpeed();
+            rev = 0.05f;
             curretShift++;
         }
         else
         {
-            if (curretGear + 0.5f <= 3f)
+            if (curretShift <= 6)
             {
-                curretGear += 0.5f;
+                localEngineSpeed += EngineSpeed();
+                rev = 0.05f;
+                //curretGear += 0.5f;
                 curretShift++;
             }
         }
