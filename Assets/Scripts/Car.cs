@@ -6,13 +6,13 @@ public class Car : MonoBehaviour
 {
     public Rigidbody2D rb;
 
-    public Movement movement;
+    public PlayerCarMovement movement;
     
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
-        movement = GetComponent<Movement>();
-        movement.Init(this);
+        movement = GetComponent<PlayerCarMovement>();
+        //movement.Init(this);
     }
 
     // Update is called once per frame

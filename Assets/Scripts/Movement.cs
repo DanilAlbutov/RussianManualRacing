@@ -8,17 +8,21 @@ using UnityEngine.UI;
 
 public class Movement : MonoBehaviour
 {
-    public Car car;
+    
 
-    public Text txt;
+    float temp = 0f;
 
-    float[] engineSpeedData = new float[5];    
+    public bool shiftDownFlag = false;
 
-    float localEngineSpeed = 0f;
+    public bool brakeFlag = false;
 
-    int curretShift = 0;
+    float[] engineSpeedData = new float[6];    
 
-    float curSpeed = 0f;
+    public float localEngineSpeed = 0f;
+
+    public int curretShift = 0;
+
+    public float curSpeed = 0f;
 
     public bool clutch = true;
 
@@ -26,52 +30,16 @@ public class Movement : MonoBehaviour
 
     float rev = 0.0f;
 
-    public void Init(Car cr)
-    {
-        car = cr;
-    }
-
-    void KeyHandling()
-    {
-        if (Input.GetKeyDown(KeyCode.LeftShift) && !clutch)
-        {
-            GearUp();
-        }
-
-        if (Input.GetKeyDown(KeyCode.LeftControl) && !clutch)
-        {
-            GearDown();
-        }
-        if (Input.GetKeyDown(KeyCode.X))
-        {
-            clutch = false;
-        }
-        if (Input.GetKeyUp(KeyCode.X))
-        {
-            clutch = true;
-        }
-    }
-
     public void MovementManager()
     {
         hrznt = GameManager.GetInstance().h;
-        
-        Acceleration();
 
-        KeyHandling();
+        Acceleration(); //ускорение автомобиля
 
-        SpeedControl();
+       // KeyHandling(); //обработка клавиш
 
-        GuiOutput();
+        SpeedControl(); // конотроль скорости автомобиля и обработка сцепления
 
-        
-
-    }
-
-    void GuiOutput()
-    {
-        float printSpeed = localEngineSpeed + EngineSpeed(0.002f);
-        txt.text = "Обороты: " + (EngineSpeed(0.002f) * 10000) + "\nСкорось: " + curSpeed + "\nПередача: " + curretShift;
     }
 
     public float EngineSpeed(float power)
@@ -100,7 +68,7 @@ public class Movement : MonoBehaviour
         return rev;
     }
 
-    void Acceleration()
+    public void Acceleration()
     {
         
          transform.position = new Vector3(transform.position.x + curSpeed, transform.position.y, transform.position.z);
@@ -108,18 +76,27 @@ public class Movement : MonoBehaviour
         
     }
 
-    void SpeedControl()
+    public void SpeedControl()
     {
-        
+        if (shiftDownFlag)
+        {
+            localEngineSpeed -= 0.005f;
+            if (localEngineSpeed <= temp)
+                shiftDownFlag = false;
+        }
+        if (brakeFlag)
+        {
+            curSpeed -= 0.01f;
+        }
         if (curSpeed < 0)
         {
-            curSpeed += 0.05f;
+            curSpeed = 0.0f;
         }
         if (clutch && curretShift != 0)
         {
             curSpeed = localEngineSpeed + EngineSpeed(0.002f);
         }
-        if (!clutch)
+        if (!clutch || curretShift == 0)
         {
             curSpeed = curSpeed - 0.00005f;
         }
@@ -127,44 +104,36 @@ public class Movement : MonoBehaviour
        
     }
 
-    void GearUp()
+    public void GearUp()
     {
-        if (curretShift + 1 <= 5 )
+        if (curretShift != 0) { 
+            if (curretShift + 1 <= 5 )
+            {
+                curretShift++;
+                engineSpeedData[curretShift] = EngineSpeed(0.002f);
+                localEngineSpeed += EngineSpeed(0.002f);
+                rev = 0.05f;
+            
+            }
+        } else
         {
-            engineSpeedData[curretShift] = EngineSpeed(0.002f);
-            localEngineSpeed += EngineSpeed(0.002f);
-            rev = 0.05f;
             curretShift++;
         }
         
     }
 
-    void GearDown()
+    public void GearDown()
     {
         if (curretShift - 1 >= 0)
         {
             curretShift--;
-            localEngineSpeed = localEngineSpeed - engineSpeedData[curretShift];
-                           
+            temp = localEngineSpeed - engineSpeedData[curretShift];
+            
+            shiftDownFlag = true;
             rev = engineSpeedData[curretShift];
+            engineSpeedData[curretShift] = 0f;
         }
         
     }
 
-    //исправит: при понижении на нейтраль сбрасывает скорость на 0
-
-    void brakeEngineSpeed()
-    {
-        float temp = localEngineSpeed - engineSpeedData[curretShift];
-        while (localEngineSpeed > temp)
-        {
-            if (localEngineSpeed < 0)
-            {
-                localEngineSpeed = 0f;
-                break;
-            }
-            
-            localEngineSpeed = localEngineSpeed - 0.00002f;
-        }
-    }
 }
