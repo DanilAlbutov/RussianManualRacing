@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.Experimental.UIElements;
 using UnityEngine.UI;
@@ -12,9 +13,12 @@ public class Movement : MonoBehaviour
     public Text txt;
 
     float[] engineSpeedData = new float[5];    
+
     float localEngineSpeed = 0f;
 
-    public int curretShift = 0;
+    int curretShift = 0;
+
+    public bool clutch = true;
 
     float hrznt = 0.0f;
 
@@ -30,17 +34,27 @@ public class Movement : MonoBehaviour
         hrznt = GameManager.GetInstance().h;
         
         Acceleration();
-        if (Input.GetKeyDown(KeyCode.LeftShift))
+        if (Input.GetKeyDown(KeyCode.LeftShift) && !clutch)
         {
             GearUp();
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftControl))
+        if (Input.GetKeyDown(KeyCode.LeftControl) && !clutch)
         {
             GearDown();
         }
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            clutch = false;
+        } 
+        if (Input.GetKeyUp(KeyCode.X))
+        {
+            clutch = true;
+        }
+
         float printSpeed = localEngineSpeed + EngineSpeed(0.002f);
         txt.text = "Обороты: " + (EngineSpeed(0.002f) * 10000) + "\n Скорось: " + printSpeed + "\n Передача: " + curretShift;
+
     }
 
     public float EngineSpeed(float power)
@@ -120,7 +134,8 @@ public class Movement : MonoBehaviour
                 localEngineSpeed = 0f;
                 break;
             }
-            localEngineSpeed = localEngineSpeed - 0.002f;
+            
+            localEngineSpeed = localEngineSpeed - 0.00002f;
         }
     }
 }
