@@ -18,6 +18,8 @@ public class Movement : MonoBehaviour
 
     int curretShift = 0;
 
+    float curSpeed = 0f;
+
     public bool clutch = true;
 
     float hrznt = 0.0f;
@@ -29,11 +31,8 @@ public class Movement : MonoBehaviour
         car = cr;
     }
 
-    public void MovementManager()
+    void KeyHandling()
     {
-        hrznt = GameManager.GetInstance().h;
-        
-        Acceleration();
         if (Input.GetKeyDown(KeyCode.LeftShift) && !clutch)
         {
             GearUp();
@@ -46,15 +45,33 @@ public class Movement : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             clutch = false;
-        } 
+        }
         if (Input.GetKeyUp(KeyCode.X))
         {
             clutch = true;
         }
+    }
 
+    public void MovementManager()
+    {
+        hrznt = GameManager.GetInstance().h;
+        
+        Acceleration();
+
+        KeyHandling();
+
+        SpeedControl();
+
+        GuiOutput();
+
+        
+
+    }
+
+    void GuiOutput()
+    {
         float printSpeed = localEngineSpeed + EngineSpeed(0.002f);
-        txt.text = "Обороты: " + (EngineSpeed(0.002f) * 10000) + "\n Скорось: " + printSpeed + "\n Передача: " + curretShift;
-
+        txt.text = "Обороты: " + (EngineSpeed(0.002f) * 10000) + "\nСкорось: " + curSpeed + "\nПередача: " + curretShift;
     }
 
     public float EngineSpeed(float power)
@@ -85,10 +102,29 @@ public class Movement : MonoBehaviour
 
     void Acceleration()
     {
-        if (curretShift != 0) 
-            transform.position = new Vector3(transform.position.x + (localEngineSpeed + EngineSpeed(0.002f))  , transform.position.y, transform.position.z);
-        else
-            transform.position = new Vector3(transform.position.x + (localEngineSpeed), transform.position.y, transform.position.z);
+        
+         transform.position = new Vector3(transform.position.x + curSpeed, transform.position.y, transform.position.z);
+        
+        
+    }
+
+    void SpeedControl()
+    {
+        
+        if (curSpeed < 0)
+        {
+            curSpeed += 0.05f;
+        }
+        if (clutch && curretShift != 0)
+        {
+            curSpeed = localEngineSpeed + EngineSpeed(0.002f);
+        }
+        if (!clutch)
+        {
+            curSpeed = curSpeed - 0.00005f;
+        }
+            
+       
     }
 
     void GearUp()
@@ -105,21 +141,14 @@ public class Movement : MonoBehaviour
 
     void GearDown()
     {
-        if (curretShift == 1)
+        if (curretShift - 1 >= 0)
         {
             curretShift--;
-            brakeEngineSpeed();
+            localEngineSpeed = localEngineSpeed - engineSpeedData[curretShift];
+                           
+            rev = engineSpeedData[curretShift];
         }
-        else
-        {
-            if (curretShift - 1 >= 0)
-            {
-
-                curretShift--;
-                brakeEngineSpeed();
-                rev = engineSpeedData[curretShift];
-            }
-        }
+        
     }
 
     //исправит: при понижении на нейтраль сбрасывает скорость на 0
