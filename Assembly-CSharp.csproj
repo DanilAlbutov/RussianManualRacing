@@ -69,6 +69,7 @@
     <Compile Include="Assets\Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\MoveRoad.cs" />
     <Compile Include="Assets\Scripts\PlayerCarMovement.cs" />
+    <Compile Include="Assets\Scripts\WheelRotation.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Данил/Unity Projects/Russian Manual Racing/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

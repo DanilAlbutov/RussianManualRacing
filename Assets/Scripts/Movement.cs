@@ -26,7 +26,7 @@ public class Movement : MonoBehaviour
 
     public bool clutch = true;
 
-    float hrznt = 0.0f;
+    public float hrznt = 0.0f;
 
     float rev = 0.0f;
 
