@@ -8,6 +8,7 @@ public class BotCarMovement : Movement
     public void MovementManager()
     {
         base.MovementManager();
+       
         BotControl();
         
 
@@ -15,6 +16,15 @@ public class BotCarMovement : Movement
 
     void BotControl()
     {
+        
+        clutch = false;
+        GearUp();
+        clutch = true;
+        hrznt = 1f;
+    }
 
+    private void Update()
+    {
+        MovementManager();
     }
 }

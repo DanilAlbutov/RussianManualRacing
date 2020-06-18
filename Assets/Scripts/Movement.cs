@@ -36,8 +36,6 @@ public class Movement : MonoBehaviour
 
         Acceleration(); //ускорение автомобиля
 
-       // KeyHandling(); //обработка клавиш
-
         SpeedControl(); // конотроль скорости автомобиля и обработка сцепления
 
     }
@@ -45,7 +43,7 @@ public class Movement : MonoBehaviour
     public float EngineSpeed(float power)
     {
         
-        if (Math.Abs(hrznt) > 0)
+        if (Math.Abs(hrznt) > 0f)
         {
             while (rev < 0.6f)
             {
@@ -57,7 +55,7 @@ public class Movement : MonoBehaviour
         {
             while (true)
             {
-                if (rev < 0.05)
+                if (rev < 0.05f)
                 {
                     break;
                 }
