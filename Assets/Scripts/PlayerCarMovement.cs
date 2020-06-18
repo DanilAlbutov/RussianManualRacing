@@ -11,6 +11,7 @@ public class PlayerCarMovement : Movement
     public void MovementManager()
     {
         base.MovementManager();
+        hrznt = GameManager.GetInstance().h;
         KeyHandling();
         GuiOutput();
 

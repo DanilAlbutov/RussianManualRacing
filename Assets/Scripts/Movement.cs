@@ -32,7 +32,7 @@ public class Movement : MonoBehaviour
 
     public void MovementManager()
     {
-        hrznt = GameManager.GetInstance().h;
+        
 
         Acceleration(); //ускорение автомобиля
 

@@ -14,7 +14,7 @@ public class WheelRotation : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        if (transform.parent.GetComponent<PlayerCarMovement>().curSpeed > 0)
+        if (transform.parent.GetComponent<Movement>().curSpeed > 0)
         {
             anim.SetBool("isMove", true);
         }
