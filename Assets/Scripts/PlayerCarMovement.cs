@@ -11,6 +11,7 @@ public class PlayerCarMovement : Movement
     private void Start()
     {
         enginePower = 0.002f;
+        maxEngineSpeed = 0.6f;
     }
 
     public void MovementManager()

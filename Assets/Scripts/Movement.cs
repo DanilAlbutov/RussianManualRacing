@@ -16,7 +16,11 @@ public class Movement : MonoBehaviour
 
     public bool brakeFlag = false;
 
-    public float enginePower = 0; 
+    public float enginePower = 0f;
+
+    public float maxEngineSpeed = 0f;
+
+    public float maxRp = 0f;
 
     float[] engineSpeedData = new float[6];    
 
@@ -47,7 +51,7 @@ public class Movement : MonoBehaviour
         
         if (Math.Abs(hrznt) > 0f)
         {
-            while (rev < 0.6f)
+            while (rev < maxEngineSpeed)
             {
                 rev += power;
                 return rev;

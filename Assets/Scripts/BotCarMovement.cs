@@ -9,6 +9,7 @@ public class BotCarMovement : Movement
     private void Start()
     {
         enginePower = 0.002f;
+        maxEngineSpeed = 0.5f;
         clutch = false;
         GearUp();
         clutch = true;
@@ -26,7 +27,7 @@ public class BotCarMovement : Movement
     void BotControl()
     {
         gt = EngineSpeed(enginePower);
-            if (EngineSpeed(enginePower) > 0.59)
+            if (EngineSpeed(enginePower) > maxEngineSpeed - 0.01f)
             {
                 hrznt = 0f;
                 new WaitForSeconds(5);
