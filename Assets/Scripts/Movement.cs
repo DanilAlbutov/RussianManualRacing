@@ -16,6 +16,8 @@ public class Movement : MonoBehaviour
 
     public bool brakeFlag = false;
 
+    public float enginePower = 0; 
+
     float[] engineSpeedData = new float[6];    
 
     public float localEngineSpeed = 0f;
@@ -92,7 +94,7 @@ public class Movement : MonoBehaviour
         }
         if (clutch && curretShift != 0)
         {
-            curSpeed = localEngineSpeed + EngineSpeed(0.002f);
+            curSpeed = localEngineSpeed + EngineSpeed(enginePower);
         }
         if (!clutch || curretShift == 0)
         {
@@ -108,8 +110,8 @@ public class Movement : MonoBehaviour
             if (curretShift + 1 <= 5 )
             {
                 curretShift++;
-                engineSpeedData[curretShift] = EngineSpeed(0.002f);
-                localEngineSpeed += EngineSpeed(0.002f);
+                engineSpeedData[curretShift] = EngineSpeed(enginePower);
+                localEngineSpeed += EngineSpeed(enginePower);
                 rev = 0.05f;
             
             }

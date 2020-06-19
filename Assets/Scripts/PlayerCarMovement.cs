@@ -8,6 +8,11 @@ public class PlayerCarMovement : Movement
 
     public Text txt;
 
+    private void Start()
+    {
+        enginePower = 0.002f;
+    }
+
     public void MovementManager()
     {
         base.MovementManager();
