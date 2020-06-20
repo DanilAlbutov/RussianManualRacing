@@ -18,6 +18,8 @@ public class Movement : MonoBehaviour
 
     public float enginePower = 0f;
 
+    public float curretPos = 0f;
+
     public float maxEngineSpeed = 0f;
 
     public float maxRp = 0f;
@@ -74,8 +76,8 @@ public class Movement : MonoBehaviour
 
     public void Acceleration()
     {
-        
-         transform.position = new Vector3(transform.position.x + curSpeed, transform.position.y, transform.position.z);
+        curretPos = gameObject.transform.position.x;
+        transform.position = new Vector3(transform.position.x + curSpeed, transform.position.y, transform.position.z);
         
         
     }

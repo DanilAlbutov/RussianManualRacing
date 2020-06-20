@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class PlayerCarMovement : Movement
 {
 
-    public Text txt;
+    
 
     private void Start()
     {
@@ -19,7 +19,7 @@ public class PlayerCarMovement : Movement
         base.MovementManager();
         hrznt = GameManager.GetInstance().h;
         KeyHandling();
-        GuiOutput();
+        
 
     }
 
@@ -52,11 +52,7 @@ public class PlayerCarMovement : Movement
         }
     }
 
-    void GuiOutput()
-    {
-        float printSpeed = localEngineSpeed + EngineSpeed(0.002f);
-        txt.text = "Обороты: " + (EngineSpeed(0.002f) * 10000) + "\nСкорось: " + curSpeed + "\nПередача: " + curretShift;
-    }
+   
 
     
 }
