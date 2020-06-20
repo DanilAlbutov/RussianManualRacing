@@ -10,8 +10,8 @@ public class PlayerCarMovement : Movement
 
     private void Start()
     {
-        enginePower = 0.002f;
-        maxEngineSpeed = 0.6f;
+        enginePower = GameData.playerCarPower;
+        maxEngineSpeed = GameData.playerMaxEngineRp;
     }
 
     public void MovementManager()

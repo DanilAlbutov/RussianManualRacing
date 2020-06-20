@@ -4,13 +4,25 @@ using UnityEngine;
 
 public static class GameData 
 {
-    public static float playerCarPower = 0.1337f;
+    public static float playerCarPower = 0.002f;
 
-    public static float playerMaxEngineRp = 0.56f;
+    public static float playerMaxEngineRp = 0.6f;
 
-    public static float botCarPower = 0.1337f;
+    public static int playerCarColor = 1;
 
-    public static float botMaxEngineRp = 0.56f;
+    public static int playerWheelsColor = 1;
+
+
+
+    public static float botCarPower = 0.0017f;
+
+    public static float botMaxEngineRp = 0.5f;
+
+    public static int botCarColor = 3;
+
+    public static int botWheelsColor = 4;
+
+
 
     public static float maxDistance = 500.0f;
     

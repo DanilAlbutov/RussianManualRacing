@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\BotCarMovement.cs" />
     <Compile Include="Assets\Scripts\CamMove.cs" />
     <Compile Include="Assets\Scripts\Car.cs" />
+    <Compile Include="Assets\Scripts\CarAppearanceControler.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GuiOutput.cs" />

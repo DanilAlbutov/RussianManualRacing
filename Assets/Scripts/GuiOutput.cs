@@ -7,6 +7,7 @@ public class GuiOutput : MonoBehaviour
 {
     Movement mv;
     public Slider sld;
+    
     public Text txt = null;
     // Start is called before the first frame update
     void Start()

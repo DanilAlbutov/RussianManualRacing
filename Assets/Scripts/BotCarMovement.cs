@@ -5,11 +5,11 @@ using UnityEngine;
 public class BotCarMovement : Movement
 {
     // Start is called before the first frame update
-    public float gt = 0f;
+    
     private void Start()
     {
-        enginePower = 0.002f;
-        maxEngineSpeed = 0.5f;
+        enginePower = GameData.botCarPower;
+        maxEngineSpeed = GameData.botMaxEngineRp;
         clutch = false;
         GearUp();
         clutch = true;
@@ -26,7 +26,7 @@ public class BotCarMovement : Movement
 
     void BotControl()
     {
-        gt = EngineSpeed(enginePower);
+        
             if (EngineSpeed(enginePower) > maxEngineSpeed - 0.01f)
             {
                 hrznt = 0f;
