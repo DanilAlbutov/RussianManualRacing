@@ -8,9 +8,9 @@ public static class GameData
 
     public static float playerMaxEngineRp = 0.6f;
 
-    public static int playerCarColor = 1;
+    public static int playerCarColor = 3;
 
-    public static int playerWheelsColor = 1;
+    public static int playerWheelsColor = 0;
 
 
 
@@ -18,7 +18,7 @@ public static class GameData
 
     public static float botMaxEngineRp = 0.5f;
 
-    public static int botCarColor = 3;
+    public static int botCarColor = 4;
 
     public static int botWheelsColor = 4;
 

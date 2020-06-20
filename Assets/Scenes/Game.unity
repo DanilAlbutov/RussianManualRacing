@@ -333,6 +333,7 @@ GameObject:
   - component: {fileID: 266039674}
   - component: {fileID: 266039673}
   - component: {fileID: 266039675}
+  - component: {fileID: 266039678}
   m_Layer: 0
   m_Name: Car
   m_TagString: Untagged
@@ -454,6 +455,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &266039678
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 266039672}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8fc993d1075c046a24ec7e2ef4e2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &359942552
 GameObject:
   m_ObjectHideFlags: 0
@@ -503,6 +516,7 @@ GameObject:
   - component: {fileID: 366736685}
   - component: {fileID: 366736684}
   - component: {fileID: 366736688}
+  - component: {fileID: 366736689}
   m_Layer: 0
   m_Name: CarBot
   m_TagString: Untagged
@@ -533,7 +547,6 @@ MonoBehaviour:
   curSpeed: 0
   clutch: 1
   hrznt: 0
-  gt: 0
 --- !u!114 &366736685
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -625,6 +638,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sld: {fileID: 1921243672}
   txt: {fileID: 92675201}
+--- !u!114 &366736689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 366736683}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1a8fc993d1075c046a24ec7e2ef4e2b3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &426439433
 GameObject:
   m_ObjectHideFlags: 0
