@@ -17,6 +17,7 @@ public class CarAppearanceControler : MonoBehaviour
 
     public void getData()
     {
+        GameData.GetData();
         carSR = gameObject.GetComponent<SpriteRenderer>();
         frontWheelSR = gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>();
         rearWheelSR = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
@@ -34,11 +35,12 @@ public class CarAppearanceControler : MonoBehaviour
 
     private void Awake()
     {
-        getData();
+        GameData.GetData();
     }
 
     private void Start()
     {
+        getData();
         SetAllColors();
     }
 

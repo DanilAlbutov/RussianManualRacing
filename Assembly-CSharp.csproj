@@ -63,8 +63,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\BotCarMovement.cs" />
-    <Compile Include="Assets\Scripts\CamMove.cs" />
     <Compile Include="Assets\Scripts\Car.cs" />
     <Compile Include="Assets\Scripts\CarAppearanceControler.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
@@ -72,10 +70,12 @@
     <Compile Include="Assets\Scripts\GuiOutput.cs" />
     <Compile Include="Assets\Scripts\MenuControlScripts\ColorControl.cs" />
     <Compile Include="Assets\Scripts\MenuControlScripts\MenuControl.cs" />
-    <Compile Include="Assets\Scripts\Movement.cs" />
-    <Compile Include="Assets\Scripts\MoveRoad.cs" />
-    <Compile Include="Assets\Scripts\PlayerCarMovement.cs" />
-    <Compile Include="Assets\Scripts\WheelRotation.cs" />
+    <Compile Include="Assets\Scripts\Movement\BotCarMovement.cs" />
+    <Compile Include="Assets\Scripts\Movement\CamMove.cs" />
+    <Compile Include="Assets\Scripts\Movement\Movement.cs" />
+    <Compile Include="Assets\Scripts\Movement\MoveRoad.cs" />
+    <Compile Include="Assets\Scripts\Movement\PlayerCarMovement.cs" />
+    <Compile Include="Assets\Scripts\Movement\WheelRotation.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Данил/Unity Projects/Russian Manual Racing/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

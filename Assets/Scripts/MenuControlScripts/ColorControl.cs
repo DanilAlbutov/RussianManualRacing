@@ -46,6 +46,7 @@ public class ColorControl : MonoBehaviour
         {
             GameData.playerWheelsColor = curColor;
         }
+        GameData.SetData();
         ac.getData();
         ac.SetAllColors();
     }
