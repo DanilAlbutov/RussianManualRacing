@@ -12,6 +12,7 @@ public static class GameData
 
     public static int playerWheelsColor = 0;
 
+
     public static float botCarPower = 0.0017f;
 
     public static float botMaxEngineRp = 0.5f;
@@ -20,7 +21,12 @@ public static class GameData
 
     public static int botWheelsColor = 4;
 
+
     public static float maxDistance = 500.0f;
+
+    public static string lastGameResult = "win";
+
+    
     
     public static void SetData()
     {

@@ -6,12 +6,14 @@ using UnityEngine.UI;
 public class PlayerCarMovement : Movement
 {
 
+
     
 
     private void Start()
     {
         enginePower = GameData.playerCarPower;
         maxEngineSpeed = GameData.playerMaxEngineRp;
+        
     }
 
     public void MovementManager()
