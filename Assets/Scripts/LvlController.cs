@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class LvlController : MonoBehaviour
 {
@@ -15,6 +16,10 @@ public class LvlController : MonoBehaviour
     void Start()
     {
         DontDestroyOnLoad(this.gameObject);
+        if (GameObject.FindGameObjectsWithTag("LvlControl").Length > 1)
+        {
+            Destroy(gameObject);
+        }
         
         
     }
@@ -23,8 +28,8 @@ public class LvlController : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Game")
         {
-            bot = GameObject.FindGameObjectsWithTag("Bot")[0];
-            player = GameObject.FindGameObjectsWithTag("Player")[0];
+            bot = GameObject.FindGameObjectWithTag("Bot");
+            player = GameObject.FindGameObjectWithTag("Player");
             flag = false;
         }
     }
@@ -36,8 +41,11 @@ public class LvlController : MonoBehaviour
             if (flag)
                 GetObjects();
 
-            CheckPosition();
-            
+            CheckPosition();            
+        }
+        if(SceneManager.GetActiveScene().name == "EndGame" )
+        {
+            GameObject.FindGameObjectWithTag("Text").GetComponent<Text>().text = GameData.lastGameResult;
         }
     }
 
