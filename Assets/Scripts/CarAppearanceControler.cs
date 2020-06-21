@@ -14,12 +14,13 @@ public class CarAppearanceControler : MonoBehaviour
 
     int clrWheels;
 
-    private void Awake()
+
+    public void getData()
     {
         carSR = gameObject.GetComponent<SpriteRenderer>();
         frontWheelSR = gameObject.transform.GetChild(1).GetComponent<SpriteRenderer>();
         rearWheelSR = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
-        if(gameObject.name == "Car")
+        if (gameObject.name == "Car")
         {
             clrCar = GameData.playerCarColor;
             clrWheels = GameData.playerWheelsColor;
@@ -31,12 +32,24 @@ public class CarAppearanceControler : MonoBehaviour
         }
     }
 
+    private void Awake()
+    {
+        getData();
+    }
+
     private void Start()
+    {
+        SetAllColors();
+    }
+
+    public void SetAllColors()
     {
         SetColorById(clrCar, carSR);
         SetColorById(clrWheels, frontWheelSR);
         SetColorById(clrWheels, rearWheelSR);
     }
+
+
 
     void SetColorById(int id, SpriteRenderer sprite)
     {

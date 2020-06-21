@@ -25,4 +25,9 @@ public class MenuControl : MonoBehaviour
         SceneManager.LoadScene("Setlvl");
     }
 
+    public void BackPressed()
+    {
+        SceneManager.LoadScene("MainMenu");
+    }
+
 }

@@ -70,7 +70,8 @@
     <Compile Include="Assets\Scripts\GameData.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GuiOutput.cs" />
-    <Compile Include="Assets\Scripts\MenuControl.cs" />
+    <Compile Include="Assets\Scripts\MenuControlScripts\ColorControl.cs" />
+    <Compile Include="Assets\Scripts\MenuControlScripts\MenuControl.cs" />
     <Compile Include="Assets\Scripts\Movement.cs" />
     <Compile Include="Assets\Scripts\MoveRoad.cs" />
     <Compile Include="Assets\Scripts\PlayerCarMovement.cs" />
