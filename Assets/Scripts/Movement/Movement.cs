@@ -36,7 +36,7 @@ public class Movement : MonoBehaviour
 
     public float hrznt = 0.0f;
 
-    float rev = 0.0f;
+    public float rev = 0.0f;
 
     public void MovementManager()
     {

@@ -67,7 +67,9 @@
     <Compile Include="Assets\Scripts\CarAppearanceControler.cs" />
     <Compile Include="Assets\Scripts\GameData.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
-    <Compile Include="Assets\Scripts\GuiOutput.cs" />
+    <Compile Include="Assets\Scripts\Gui\GuiOutput.cs" />
+    <Compile Include="Assets\Scripts\Gui\SpeedCarMetr.cs" />
+    <Compile Include="Assets\Scripts\Gui\SpeedEngineMetr.cs" />
     <Compile Include="Assets\Scripts\LvlController.cs" />
     <Compile Include="Assets\Scripts\MenuControlScripts\ColorControl.cs" />
     <Compile Include="Assets\Scripts\MenuControlScripts\MenuControl.cs" />
