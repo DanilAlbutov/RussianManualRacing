@@ -24,19 +24,28 @@ public class Movement : MonoBehaviour
 
     public float maxRp = 0f;
 
-    float[] engineSpeedData = new float[6];    
+    public float[] engineSpeedData = new float[6];    
+
+    public List<float> EngineSpeedData;
 
     public float localEngineSpeed = 0f;
 
     public int curretShift = 0;
 
-    public float curSpeed = 0f;
+    public float curSpeed = 0.0f;
 
     public bool clutch = true;
 
     public float hrznt = 0.0f;
 
     public float rev = 0.0f;
+
+    
+    
+    private void Start()
+    {
+        EngineSpeedData.Add(0.05f);
+    }
 
     public void MovementManager()
     {
@@ -92,54 +101,77 @@ public class Movement : MonoBehaviour
         }
         if (brakeFlag)
         {
-            curSpeed -= 0.01f;
+            DecreaseSpeed(0.01f); //curSpeed -= 0.01f;
         }
-        if (curSpeed < 0)
-        {
-            curSpeed = 0.0f;
-        }
-        if (clutch && curretShift != 0)
+        
+        if (clutch && EngineSpeedData.Count  != 0)
         {
             curSpeed = localEngineSpeed + EngineSpeed(enginePower);
         }
-        if (!clutch || curretShift == 0)
+        if (!clutch || EngineSpeedData.Count  == 0)
         {
-            curSpeed = curSpeed - 0.00005f;
+            DecreaseSpeed(0.00005f); //curSpeed = curSpeed - 0.00005f;
         }
             
        
     }
 
+    void DecreaseSpeed(float factor)
+    {
+        if (curSpeed - factor < 0)
+        {
+            curSpeed = 0.0f;
+            return;
+        }
+        curSpeed -= factor;
+    }
+
     public void GearUp()
     {
-        if (curretShift != 0) { 
-            if (curretShift + 1 <= 5 )
-            {
-                curretShift++;
-                engineSpeedData[curretShift] = EngineSpeed(enginePower);
-                localEngineSpeed += EngineSpeed(enginePower);
-                rev = 0.05f;
-            
-            }
-        } else
+        if (EngineSpeedData.Count < 6)
         {
-            curretShift++;
+            EngineSpeedData.Add(EngineSpeed(enginePower));
+            localEngineSpeed += EngineSpeed(enginePower);
+            rev = 0.05f;
         }
-        
+
+        //if (curretShift != 0) {
+        //    if (curretShift + 1 <= 5)
+        //    {
+        //        curretShift++;
+        //        engineSpeedData[curretShift] = EngineSpeed(enginePower);
+        //        localEngineSpeed += EngineSpeed(enginePower);
+        //        rev = 0.05f;
+
+        //    }
+        //}
+        //else
+        //{
+        //    curretShift++;
+        //}
+
     }
 
     public void GearDown()
     {
-        if (curretShift - 1 >= 0)
+        //if (curretShift - 1 >= 0)
+        //{
+        //    curretShift--;
+        //    temp = localEngineSpeed - engineSpeedData[curretShift];
+
+        //    shiftDownFlag = true;
+        //    rev = engineSpeedData[curretShift];
+        //    engineSpeedData[curretShift] = 0f;
+        //}
+
+        if (EngineSpeedData.Count - 1 >= 0)
         {
-            curretShift--;
-            temp = localEngineSpeed - engineSpeedData[curretShift];
-            
+            temp = localEngineSpeed - EngineSpeedData[EngineSpeedData.Count - 1];
             shiftDownFlag = true;
-            rev = engineSpeedData[curretShift];
-            engineSpeedData[curretShift] = 0f;
+            rev = EngineSpeedData[EngineSpeedData.Count - 1];
+            EngineSpeedData.RemoveAt(EngineSpeedData.Count - 1);
         }
-        
+
     }
 
 }

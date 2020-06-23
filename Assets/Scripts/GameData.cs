@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public static class GameData 
 {
     public static float playerCarPower = 0.002f;
@@ -26,6 +27,14 @@ public static class GameData
 
     public static string lastGameResult = "win";
 
+    public static float lastRewardForVictory = 0f;
+    public static float lastRewardForLose = 0f;
+
+
+    public static int curMoney = 0;
+
+    public static int curLvl = 0;
+
     
     
     public static void SetData()
@@ -34,6 +43,8 @@ public static class GameData
         PlayerPrefs.SetFloat("curPlayerMaxEngineRp", playerMaxEngineRp);
         PlayerPrefs.SetInt("curPlayerCarColor", playerCarColor);
         PlayerPrefs.SetInt("curPlayerWheelsColor", playerWheelsColor);
+        PlayerPrefs.SetInt("curMoney", curMoney);
+        PlayerPrefs.SetInt("curLvl", curLvl);
         PlayerPrefs.Save();
     }
 
@@ -43,6 +54,8 @@ public static class GameData
         playerMaxEngineRp = PlayerPrefs.GetFloat("curPlayerMaxEngineRp");
         playerCarColor = PlayerPrefs.GetInt("curPlayerCarColor");
         playerWheelsColor = PlayerPrefs.GetInt("curPlayerWheelsColor");
+        curMoney = PlayerPrefs.GetInt("curMoney");
+        curLvl = PlayerPrefs.GetInt("curLvl");
     }
     // Start is called before the first frame update
 

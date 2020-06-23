@@ -30,4 +30,9 @@ public class MenuControl : MonoBehaviour
         SceneManager.LoadScene("MainMenu");
     }
 
+    public void NextLvlPressed()
+    {
+        
+    }
+
 }
