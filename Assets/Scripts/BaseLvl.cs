@@ -15,11 +15,13 @@ public class BaseLvl
 
     float maxDistance = GameData.maxDistance;
 
-    BaseLvl(int valueSum, int rewardMult , float distance)
+    public BaseLvl(int curLevel)
     {
+        float valueSum = curLevel * 0.00001f ;
+        float distance = (curLevel / (curLevel + 1)) * 1700.0f;
         botCarPower += valueSum;
         if (botCarMaxEngineRp <= 0.6)
-            botCarMaxEngineRp += valueSum;
+            botCarMaxEngineRp += (valueSum * 10f);
         else
             botCarMaxEngineRp = 0.52f;
         if (botCarColor >= 5)

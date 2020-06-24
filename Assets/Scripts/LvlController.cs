@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Assertions.Must;
+using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -40,24 +42,26 @@ public class LvlController : MonoBehaviour
         {
             if (flag)
                 GetObjects();
-
-            CheckPosition();            
+            if (player != null)
+                CheckPosition();            
         }
         if(SceneManager.GetActiveScene().name == "EndGame" )
         {
             GameObject.FindGameObjectWithTag("Text").GetComponent<Text>().text = GameData.lastGameResult;
+            
         }
     }
 
     void CheckPosition()
     {
-        if (GameData.maxDistance <= player.transform.position.x)
+        if (GameData.maxDistance <= player?.transform.position.x)
         {
             GameData.lastGameResult = "you win";
             SceneManager.LoadScene("EndGame");
+            
         }
 
-        if (GameData.maxDistance <= bot.transform.position.x)
+        if (GameData.maxDistance <= bot?.transform.position.x)
         {
             GameData.lastGameResult = "you lose";
             SceneManager.LoadScene("EndGame");

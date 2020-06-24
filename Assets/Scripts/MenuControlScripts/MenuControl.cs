@@ -32,7 +32,10 @@ public class MenuControl : MonoBehaviour
 
     public void NextLvlPressed()
     {
-        
+        GameData.tempSumValue += 0.001f;
+        GameData.curLvl += 1;
+        BaseLvl lvl = new BaseLvl(GameData.curLvl);
+        GameData.SetData();
     }
 
 }

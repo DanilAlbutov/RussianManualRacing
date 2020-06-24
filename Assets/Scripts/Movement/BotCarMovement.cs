@@ -6,11 +6,22 @@ using UnityEngine;
 public class BotCarMovement : Movement
 {
     // Start is called before the first frame update
-    
+    public float shiftUpDelay;
+
+    private IEnumerator flagCoroutine;
+
+    private void Awake()
+    {
+        
+    }
+
     private void Start()
     {
         enginePower = GameData.botCarPower;
         maxEngineSpeed = GameData.botMaxEngineRp;
+        shiftUpDelay = 1.2f; // задержка переключения бота
+        
+        
         clutch = false;
         GearUp();
         clutch = true;
@@ -25,19 +36,33 @@ public class BotCarMovement : Movement
 
     }
 
-    void BotControl()
+    IEnumerator Delay()
     {
         
-            if (EngineSpeed(enginePower) > maxEngineSpeed - 0.01f)
+        Debug.Log("Начало задержки");
+        yield return new WaitForSeconds(shiftUpDelay);
+        Debug.Log("Конец задержки");
+        GearUp();
+        flagCoroutine = null;
+    }
+
+    private void BotControl()
+    {
+        
+        if (EngineSpeed(enginePower) > maxEngineSpeed - 0.01f)
+        {
+            hrznt = 0f;
+            clutch = false;
+            if (flagCoroutine == null)
             {
-                hrznt = 0f;
-                new WaitForSeconds(5);
-                
-                clutch = false;
-                GearUp();
-                clutch = true;
-                hrznt = 1f;
+                flagCoroutine = Delay();
+                StartCoroutine(flagCoroutine);
             }
+            
+            clutch = true;
+            hrznt = 1f;
+
+        }
     }
 
     private void Update()

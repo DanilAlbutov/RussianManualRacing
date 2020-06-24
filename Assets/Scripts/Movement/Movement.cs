@@ -10,37 +10,26 @@ public class Movement : MonoBehaviour
 {
     
 
-    float temp = 0f;
-
+    
+    public bool clutch = true;
     public bool shiftDownFlag = false;
-
     public bool brakeFlag = false;
 
+    float temp = 0f;
+
     public float enginePower = 0f;
-
     public float curretPos = 0f;
-
     public float maxEngineSpeed = 0f;
-
     public float maxRp = 0f;
-
-    public float[] engineSpeedData = new float[6];    
-
-    public List<float> EngineSpeedData;
-
     public float localEngineSpeed = 0f;
-
-    public int curretShift = 0;
-
     public float curSpeed = 0.0f;
-
-    public bool clutch = true;
-
     public float hrznt = 0.0f;
-
     public float rev = 0.0f;
+    public float accelValue = 0.00015f;
 
-    
+    public List<float> EngineSpeedData;   
+
+    public int curretShift = 0;   
     
     private void Start()
     {
@@ -133,43 +122,19 @@ public class Movement : MonoBehaviour
             EngineSpeedData.Add(EngineSpeed(enginePower));
             localEngineSpeed += EngineSpeed(enginePower);
             rev = 0.05f;
+            enginePower += accelValue;
         }
-
-        //if (curretShift != 0) {
-        //    if (curretShift + 1 <= 5)
-        //    {
-        //        curretShift++;
-        //        engineSpeedData[curretShift] = EngineSpeed(enginePower);
-        //        localEngineSpeed += EngineSpeed(enginePower);
-        //        rev = 0.05f;
-
-        //    }
-        //}
-        //else
-        //{
-        //    curretShift++;
-        //}
-
     }
 
     public void GearDown()
     {
-        //if (curretShift - 1 >= 0)
-        //{
-        //    curretShift--;
-        //    temp = localEngineSpeed - engineSpeedData[curretShift];
-
-        //    shiftDownFlag = true;
-        //    rev = engineSpeedData[curretShift];
-        //    engineSpeedData[curretShift] = 0f;
-        //}
-
         if (EngineSpeedData.Count - 1 >= 0)
         {
             temp = localEngineSpeed - EngineSpeedData[EngineSpeedData.Count - 1];
             shiftDownFlag = true;
             rev = EngineSpeedData[EngineSpeedData.Count - 1];
             EngineSpeedData.RemoveAt(EngineSpeedData.Count - 1);
+            enginePower -= accelValue;
         }
 
     }
