@@ -12,8 +12,8 @@ public static class GameData
     public static int playerWheelsColor = 0;
 
     //bot
-    public static float botCarPower = 0.0017f;
-    public static float botMaxEngineRp = 0.5f;
+    public static float botCarPower = 0.002f;
+    public static float botMaxEngineRp = 0.6f;
     public static int botCarColor = 4;
     public static int botWheelsColor = 4;
     public static float botDelay = 2.0f;

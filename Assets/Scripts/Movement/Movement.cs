@@ -117,7 +117,7 @@ public class Movement : MonoBehaviour
 
     public void GearUp()
     {
-        if (EngineSpeedData.Count < 6)
+        if (EngineSpeedData.Count < 5)
         {
             EngineSpeedData.Add(EngineSpeed(enginePower));
             localEngineSpeed += EngineSpeed(enginePower);
