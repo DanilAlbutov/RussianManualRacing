@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 using UnityEngine.Assertions.Must;
 using UnityEngine.Events;
@@ -13,6 +14,8 @@ public class LvlController : MonoBehaviour
 
     GameObject bot;
 
+    float timeToStart = 3;
+
     bool flag = true;
 
     void Start()
@@ -22,6 +25,7 @@ public class LvlController : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        
         
         
     }
@@ -40,8 +44,14 @@ public class LvlController : MonoBehaviour
     {
         if (SceneManager.GetActiveScene().name == "Game")
         {
+            
             if (flag)
+            {
                 GetObjects();
+                bot.GetComponent<Movement>().enginePower = 0.0f;
+                bot.GetComponent<Movement>().accelValue = 0.0f;
+            }
+                
             if (player != null)
                 CheckPosition();            
         }
@@ -68,6 +78,34 @@ public class LvlController : MonoBehaviour
         }
     }
 
+    void StartControler()
+    {
+        if (SceneManager.GetActiveScene().name == "Game")
+        {
+            timeToStart -= Time.deltaTime;
+            if ( timeToStart <= 0 && ( timeToStart >= -4))
+            {
+                GameObject.FindGameObjectWithTag("Text").GetComponent<Text>().text = "GO!";
+            }
+            if (timeToStart < 5)
+            {
+                GameObject.FindGameObjectWithTag("Text").GetComponent<Text>().text = "";
+            }
+            if (timeToStart > 0)
+            {
+                bot.GetComponent<Movement>().curSpeed = 0.0f;
+                player.GetComponent<Movement>().curSpeed = 0.0f;
+                GameObject.FindGameObjectWithTag("Text").GetComponent<Text>().text = ((int)timeToStart) + 1 + "";
+            }
+            
+        }
+    }
+
+    private void Update()
+    {
+        StartControler();
+    }
+    
     private void FixedUpdate()
     {
         SceneControl();

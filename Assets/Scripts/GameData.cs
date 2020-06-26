@@ -16,10 +16,10 @@ public static class GameData
     public static float botMaxEngineRp = 0.6f;
     public static int botCarColor = 4;
     public static int botWheelsColor = 4;
-    public static float botDelay = 2.0f;
+    public static float botDelay = 1.0f;
 
     //lvl settings
-    public static float maxDistance = 500.0f;
+    public static float maxDistance = 2000.0f;
     public static string lastGameResult = "win";
     public static float lastRewardForVictory = 0f;
     public static float lastRewardForLose = 0f;
