@@ -14,7 +14,7 @@ public class LvlController : MonoBehaviour
 
     GameObject bot;
 
-    float timeToStart = 3;
+    public float timeToStart = 3.0f;
 
     bool flag = true;
 
@@ -47,9 +47,9 @@ public class LvlController : MonoBehaviour
             
             if (flag)
             {
+                
                 GetObjects();
-                bot.GetComponent<Movement>().enginePower = 0.0f;
-                bot.GetComponent<Movement>().accelValue = 0.0f;
+                
             }
                 
             if (player != null)
@@ -57,6 +57,7 @@ public class LvlController : MonoBehaviour
         }
         if(SceneManager.GetActiveScene().name == "EndGame" )
         {
+            ResetData();
             GameObject.FindGameObjectWithTag("Text").GetComponent<Text>().text = GameData.lastGameResult;
             
         }
@@ -66,16 +67,22 @@ public class LvlController : MonoBehaviour
     {
         if (GameData.maxDistance <= player?.transform.position.x)
         {
-            GameData.lastGameResult = "you win";
+            GameData.lastGameResult = "win";
             SceneManager.LoadScene("EndGame");
             
         }
 
         if (GameData.maxDistance <= bot?.transform.position.x)
         {
-            GameData.lastGameResult = "you lose";
+            GameData.lastGameResult = "lose";
             SceneManager.LoadScene("EndGame");
         }
+    }
+
+    void ResetData()
+    {
+        timeToStart = 3.0f;
+        flag = true;
     }
 
     void StartControler()
@@ -83,10 +90,7 @@ public class LvlController : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Game")
         {
             timeToStart -= Time.deltaTime;
-            if ( timeToStart <= 0 && ( timeToStart >= -4))
-            {
-                GameObject.FindGameObjectWithTag("Text").GetComponent<Text>().text = "GO!";
-            }
+            
             if (timeToStart < 5)
             {
                 GameObject.FindGameObjectWithTag("Text").GetComponent<Text>().text = "";
