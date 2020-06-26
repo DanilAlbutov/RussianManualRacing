@@ -20,6 +20,7 @@ public class LvlController : MonoBehaviour
 
     void Start()
     {
+        GameData.GetData();
         DontDestroyOnLoad(this.gameObject);
         if (GameObject.FindGameObjectsWithTag("LvlControl").Length > 1)
         {

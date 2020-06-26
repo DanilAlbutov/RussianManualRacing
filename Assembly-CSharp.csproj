@@ -80,6 +80,7 @@
     <Compile Include="Assets\Scripts\Movement\MoveRoad.cs" />
     <Compile Include="Assets\Scripts\Movement\PlayerCarMovement.cs" />
     <Compile Include="Assets\Scripts\Movement\WheelRotation.cs" />
+    <Compile Include="Assets\Scripts\TransmissionControl.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Данил/Unity Projects/Russian Manual Racing/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>

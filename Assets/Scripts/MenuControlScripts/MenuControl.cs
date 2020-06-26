@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MenuControl : MonoBehaviour
 {
+    public int currentLevel = GameData.curLvl;
+
     public void StartGamePressed()
     {
         SceneManager.LoadScene("Game");
@@ -32,9 +34,12 @@ public class MenuControl : MonoBehaviour
 
     public void NextLvlPressed()
     {
+        GameData.GetData();
+        currentLevel++;
         GameData.tempSumValue += 0.001f;
-        GameData.curLvl += 1;
-        BaseLvl lvl = new BaseLvl(GameData.curLvl);
+        GameData.curLvl = currentLevel;
+        
+        
         GameData.SetData();
     }
 

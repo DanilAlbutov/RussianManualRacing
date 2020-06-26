@@ -26,7 +26,8 @@ public class GuiOutput : MonoBehaviour
     void PrintCurretCarSetup()
     {
         //float printSpeed = mv.localEngineSpeed + mv.EngineSpeed(0.002f);
-        txt.text = "Обороты: " + (mv.EngineSpeed(0.002f) * 10000) + "\nСкорось: " + mv.curSpeed + "\nПередача: " + mv.EngineSpeedData.Count + "\nУровень: " + GameData.curLvl;
+        int clvl = GameData.curLvl;
+        txt.text = "Обороты: " + (mv.EngineSpeed(0.002f) * 10000) + "\nСкорось: " + mv.curSpeed + "\nПередача: " + mv.EngineSpeedData.Count + "\nУровень: " + clvl;
     }
 
     void PrintCurretPos()
