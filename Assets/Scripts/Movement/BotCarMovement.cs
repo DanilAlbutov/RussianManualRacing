@@ -29,19 +29,13 @@ public class BotCarMovement : Movement
     }
     public void MovementManager()
     {
-        base.MovementManager();
-       
+        base.MovementManager();       
         BotControl();
-        
-
     }
 
     IEnumerator Delay()
     {
-        
-        Debug.Log("Начало задержки");
-        yield return new WaitForSeconds(shiftUpDelay);
-        Debug.Log("Конец задержки");
+        yield return new WaitForSeconds(shiftUpDelay);        
         GearUp();
         flagCoroutine = null;
     }

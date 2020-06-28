@@ -44,11 +44,11 @@ public class PlayerCarMovement : Movement
         {
             GearDown();
         }
-        if (Input.GetKeyDown(KeyCode.X))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
             clutch = false;
         }
-        if (Input.GetKeyUp(KeyCode.X))
+        if (Input.GetKeyUp(KeyCode.Space))
         {
             clutch = true;
         }

@@ -5,116 +5,88 @@ using UnityEngine;
 public class TransmissionControl : MonoBehaviour
 {
     public Vector3 displayPos;
+    public Vector3 firstPos;
     public int curShift = 0;
+    public int lastShift = 0;
+    public GameObject selector_background;
     public GameObject car;
     Movement mv;
-    bool mouseDown;
-    // Start is called before the first frame update
+    bool[] repeatFlags = {false, false, false, false, false };
+    
+
     void Start()
     {
         mv = car.GetComponent<Movement>();
-        mouseDown = false;
+        
+        
     }
 
-    private void OnMouseDown()
-    {
-        mouseDown = true;
-    }
-
-    private void OnMouseUp()
-    {
-        mouseDown = false;
-    }
-
-    // Update is called once per frame
     void Update()
     {
+        firstPos = selector_background.transform.position;
         MoveSelector();
     }
 
     void MoveSelector()
     {
-        if (true)
+        Vector3 cursor = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        displayPos = cursor;
+        if (!mv.clutch)
         {
-            
-            // ограничить ход
-            Vector3 cursor = Input.mousePosition;
-            cursor = Camera.main.ScreenToWorldPoint(cursor);
-            displayPos = cursor;
-            cursor.z = 0.0f;
-
-
             CheckTransmissionPos(cursor);
-            
         }
+    }
 
-        void CheckTransmissionPos(Vector3 mousePos)
-        {
-            //
-            
-            switch (curShift)
-            {
-                case 0:
-                    if (mousePos.x < 14f && mousePos.y > -6.5f)
-                    {
-                        gameObject.transform.position = new Vector3(14f, -6.5f, gameObject.transform.position.z);
-                        curShift = 1;
-                    }
-                    if (mousePos.x < 14f && mousePos.y < -9f)
-                    {
-                        gameObject.transform.position = new Vector3(14f, -9f, gameObject.transform.position.z);
-                        curShift = 2;
-                    }
-                    if (mousePos.y > -6.5f)
-                    {
-                        gameObject.transform.position = new Vector3(15.5f, -6.5f, gameObject.transform.position.z);
-                        curShift = 3;
-                    }
-                    if (mousePos.y < -9f)
-                    {
-                        gameObject.transform.position = new Vector3(15.5f, -9f, gameObject.transform.position.z);
-                        curShift = 4;
-                    }
-
-                    break;
-                case 1:
-                    if (mousePos.x > 15.5f && mousePos.y < -8f)
-                    {
-                        gameObject.transform.position = new Vector3(15.5f, -8f, gameObject.transform.position.z);
-                        curShift = 0;
-                    }
-                    if (mousePos.y < -9f)
-                    {
-                        gameObject.transform.position = new Vector3(14f, -9f, gameObject.transform.position.z);
-                        curShift = 2;
-                    }
-                    break;
-                case 2:
-                    if (mousePos.x > 15.5f && mousePos.y > -8f)
-                    {
-                        gameObject.transform.position = new Vector3(15.5f, -8f, gameObject.transform.position.z);
-                        curShift = 0;
-                    }
-                    if (mousePos.y > -6.5f)
-                    {
-                        gameObject.transform.position = new Vector3(14f, -6.5f, gameObject.transform.position.z);
-                        curShift = 1;
-                    }
-                    break;
-                case 3:
-                    
-                    break;
-                case 4:
-                    
-                    break;
-                case 5:
-                    
-                    break;
-                default:
-                    
-                    break;
-            }
-        }
+    void CheckTransmissionPos(Vector3 mousePos)
+    {
         
+        if (mousePos.x > firstPos.x - 1.5f && mousePos.y < firstPos.y + 1.5f && mousePos.x < firstPos.x + 1.5f && mousePos.y > firstPos.y - 1.5f)
+        {
+            gameObject.transform.position = new Vector3(firstPos.x, firstPos.y, gameObject.transform.position.z);
+
+            curShift = 0;
+        }
+        if (mousePos.x < firstPos.x - 1.5f && mousePos.y > firstPos.y + 1.5f)
+        {
+            gameObject.transform.position = new Vector3(firstPos.x - 1.5f, firstPos.y + 1.5f, gameObject.transform.position.z);
+            CheckShiftUp(1);
+        }
+        if (mousePos.x < firstPos.x - 1.5f && mousePos.y < firstPos.y - 1.5f)
+        {
+            gameObject.transform.position = new Vector3(firstPos.x - 1.5f, firstPos.y - 1.5f, gameObject.transform.position.z);
+            CheckShiftUp(2);
+        }
+        if (mousePos.x > firstPos.x - 1.5f && mousePos.x < firstPos.x + 1.5f && mousePos.y > firstPos.y + 1.5f)
+        {
+            gameObject.transform.position = new Vector3(firstPos.x, firstPos.y + 1.5f, gameObject.transform.position.z);
+            CheckShiftUp(3);
+        }
+        if (mousePos.x > firstPos.x - 1.5f && mousePos.x < firstPos.x + 1.5f && mousePos.y < firstPos.y - 1.5f)
+        {
+            gameObject.transform.position = new Vector3(firstPos.x, firstPos.y - 1.5f, gameObject.transform.position.z);
+            CheckShiftUp(4);
+        }
+        if (mousePos.x > firstPos.x + 1.5f && mousePos.y > firstPos.y + 1.5f)
+        {
+            gameObject.transform.position = new Vector3(firstPos.x + 1.5f, firstPos.y + 1.5f, gameObject.transform.position.z);
+            CheckShiftUp(5);
+        }
+        if (mousePos.x < firstPos.x - 1.5f && mousePos.y < firstPos.y + 1.5f && mousePos.y > firstPos.y - 1.5f)
+        {
+            gameObject.transform.position = new Vector3(firstPos.x - 1.5f, firstPos.y, gameObject.transform.position.z);
+        }
+        if (mousePos.x > firstPos.x + 1.5f && mousePos.y < firstPos.y + 1.5f && mousePos.y > firstPos.y - 1.5f)
+        {
+            gameObject.transform.position = new Vector3(firstPos.x + 1.5f, firstPos.y, gameObject.transform.position.z);
+        }
+
+
+    }
+    void CheckShiftUp(int value)
+    {
+        
+        if (!repeatFlags[value - 1])
+            mv.GearUp();
+        repeatFlags[value - 1] = true;
     }
 }
