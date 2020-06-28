@@ -96,7 +96,7 @@ public class LvlController : MonoBehaviour
             {
                 GameObject.FindGameObjectWithTag("Text").GetComponent<Text>().text = "";
             }
-            if (timeToStart > 0)
+            if (timeToStart > 0 && player != null)
             {
                 bot.GetComponent<Movement>().curSpeed = 0.0f;
                 player.GetComponent<Movement>().curSpeed = 0.0f;

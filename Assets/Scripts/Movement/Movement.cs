@@ -38,12 +38,9 @@ public class Movement : MonoBehaviour
 
     public void MovementManager()
     {
-        
-
         Acceleration(); //ускорение автомобиля
 
         SpeedControl(); // конотроль скорости автомобиля и обработка сцепления
-
     }
 
     public float EngineSpeed(float power)
