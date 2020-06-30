@@ -27,7 +27,7 @@ public class GuiOutput : MonoBehaviour
     {
         //float printSpeed = mv.localEngineSpeed + mv.EngineSpeed(0.002f);
         int clvl = GameData.curLvl;
-        txt.text = "Обороты: " + (mv.EngineSpeed(0.002f) * 10000) + "\nСкорось: " + mv.curSpeed + "\nПередача: " + mv.EngineSpeedData.Count + "\nУровень: " + clvl;
+        txt.text =  mv.EngineSpeedData.Count + "";
     }
 
     void PrintCurretPos()
