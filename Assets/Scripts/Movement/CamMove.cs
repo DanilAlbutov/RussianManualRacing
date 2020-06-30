@@ -8,6 +8,6 @@ public class CamMove : MonoBehaviour
     
     void Update()
     {
-        transform.position = new Vector3(player.transform.position.x, player.transform.position.y + 3.25f, -10f);
+        transform.position = new Vector3(player.transform.position.x, player.transform.position.y , -10f);
     }
 }
