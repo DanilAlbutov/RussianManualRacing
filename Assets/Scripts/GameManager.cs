@@ -11,6 +11,8 @@ public class GameManager : MonoBehaviour
 
     private static GameManager _instance;
 
+    public bool flag = false;
+
     public static GameManager GetInstance() { return _instance; }
 
     private void Awake()
@@ -23,7 +25,13 @@ public class GameManager : MonoBehaviour
 
     void Move()
     {
-        h = Input.GetAxis("Horizontal");
+        if (!flag)
+        {
+            h = Input.GetAxis("Horizontal");
+        } else
+        {
+            h = 1f;
+        }
         car?.movement.MovementManager();
 
     }
