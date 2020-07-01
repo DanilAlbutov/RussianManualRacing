@@ -19,7 +19,7 @@ public class BotCarMovement : Movement
     {
         enginePower = GameData.botCarPower;
         maxEngineSpeed = GameData.botMaxEngineRp;
-        shiftUpDelay = 1.5f; // задержка переключения бота
+        shiftUpDelay = 3.0f; // задержка переключения бота
         
         
         clutch = false;

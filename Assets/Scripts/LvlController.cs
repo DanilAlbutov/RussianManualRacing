@@ -14,6 +14,8 @@ public class LvlController : MonoBehaviour
 
     GameObject bot;
 
+    
+
     public float timeToStart = 3.0f;
 
     bool flag = true;
@@ -22,6 +24,7 @@ public class LvlController : MonoBehaviour
     {
         GameData.GetData();
         DontDestroyOnLoad(this.gameObject);
+        
         if (GameObject.FindGameObjectsWithTag("LvlControl").Length > 1)
         {
             Destroy(gameObject);
@@ -109,6 +112,7 @@ public class LvlController : MonoBehaviour
     private void Update()
     {
         StartControler();
+        
     }
     
     private void FixedUpdate()

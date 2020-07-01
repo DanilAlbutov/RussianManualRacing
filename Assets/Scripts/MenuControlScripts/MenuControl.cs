@@ -11,7 +11,8 @@ public class MenuControl : MonoBehaviour
 
     private void Start()
     {
-        mv = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
+        if(SceneManager.GetActiveScene().name == "Game")
+            mv = GameObject.FindGameObjectWithTag("Player").GetComponent<Movement>();
     }
 
     public void StartGamePressed()

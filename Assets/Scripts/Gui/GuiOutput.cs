@@ -20,7 +20,7 @@ public class GuiOutput : MonoBehaviour
     void Update()
     {
         PrintCurretCarSetup();
-        PrintCurretPos();
+        PrintCurretPos();       
     }
 
     void PrintCurretCarSetup()
