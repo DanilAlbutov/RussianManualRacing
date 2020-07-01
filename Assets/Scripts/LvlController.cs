@@ -16,7 +16,7 @@ public class LvlController : MonoBehaviour
 
     
 
-    public float timeToStart = 3.0f;
+    public float timeToStart;
 
     bool flag = true;
 
@@ -29,9 +29,10 @@ public class LvlController : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        
-        
-        
+
+        timeToStart = 5.0f;
+
+
     }
 
     void GetObjects()
@@ -85,7 +86,7 @@ public class LvlController : MonoBehaviour
 
     void ResetData()
     {
-        timeToStart = 3.0f;
+        timeToStart = 5.0f;
         flag = true;
     }
 
@@ -94,8 +95,8 @@ public class LvlController : MonoBehaviour
         if (SceneManager.GetActiveScene().name == "Game")
         {
             timeToStart -= Time.deltaTime;
-            
-            if (timeToStart < 5)
+
+            if (timeToStart < 0)
             {
                 GameObject.FindGameObjectWithTag("Text").GetComponent<Text>().text = "";
             }

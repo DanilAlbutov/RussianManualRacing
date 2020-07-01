@@ -25,7 +25,7 @@ public class Movement : MonoBehaviour
     public float curSpeed = 0.0f;
     public float hrznt = 0.0f;
     public float rev = 0.0f;
-    public float accelValue = 0.00015f;
+    public float accelValue = 0.00019f;
 
     public List<float> EngineSpeedData;   
 

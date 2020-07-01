@@ -28,6 +28,9 @@ public class GuiOutput : MonoBehaviour
         //float printSpeed = mv.localEngineSpeed + mv.EngineSpeed(0.002f);
         int clvl = GameData.curLvl;
         txt.text =  mv.EngineSpeedData.Count + "";
+        
+        
+
     }
 
     void PrintCurretPos()
